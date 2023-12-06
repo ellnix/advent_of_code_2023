@@ -8,8 +8,8 @@ module AOC
       solutions[key] = solution
     end
 
-    def input_file(name)
-      "#{__dir__}/../input/#{name}"
+    def input_lines(name)
+      File.readlines "#{__dir__}/../input/#{name}"
     end
   end
 end

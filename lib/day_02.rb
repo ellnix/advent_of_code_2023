@@ -1,7 +1,7 @@
 Game = Struct.new(:id, :rounds)
 
 def parse_games
-  File.readlines(AOC.input_file('day_02')).map do |game_line|
+  AOC.input_lines('day_02').map do |game_line|
     matches = game_line.match(/Game (?<id>\d+): (?<rounds>.+)$/)
     rounds = matches[:rounds].split(';').map do |round_string|
       round_string.split(',').map do |cubes_string|
@@ -13,6 +13,7 @@ def parse_games
     Game.new(matches[:id].to_i, rounds)
   end
 end
+
 solution = lambda do
   allowed_cubes = { 'red' => 12, 'green' => 13, 'blue' => 14 }
   part1 =

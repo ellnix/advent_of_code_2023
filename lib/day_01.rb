@@ -11,11 +11,11 @@ DIGITS = {
 }
 
 solution = lambda do
-  part1 = File.readlines(AOC.input_file('day_01')).sum do |line|
+  part1 = AOC.input_lines('day_01').sum do |line|
     line.scan(/\d/).values_at(0, -1).reduce(&:+).to_i
   end
 
-  part2 = File.readlines(AOC.input_file('day_01')).sum do |line|
+  part2 = AOC.input_lines('day_01').sum do |line|
     first = { digit: '0', idx: Float::INFINITY }
     last = { digit: '0', ridx: -1 }
 
