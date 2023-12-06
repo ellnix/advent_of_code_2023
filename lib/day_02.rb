@@ -19,7 +19,24 @@ solution = lambda do
       end
     end.sum(&:id)
 
-  [part1]
+  part2 = 
+    File.readlines(AOC.input_file('day_02')).map do |game_line|
+      matches = game_line.match(/Game (?<id>\d+): (?<rounds>.+)$/)
+      rounds = matches[:rounds].split(';').map do |round_string|
+        round_string.split(',').map do |cubes_string|
+          number, color = cubes_string.split
+          [color, number.to_i]
+        end.to_h
+      end
+
+      Game.new(matches[:id].to_i, rounds)
+    end.sum do |game|
+      game.rounds.reduce do |memo, round|
+        memo.merge(round) { |_color, number1, number2| [number1, number2].max }
+      end.values.reduce(&:*)
+    end
+
+  [part1, part2]
 end
 
 AOC.add_solution 2, solution
