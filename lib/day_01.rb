@@ -10,12 +10,14 @@ DIGITS = {
   'nine' => '9'
 }
 
-solution = lambda do
-  part1 = AOC.input_lines('day_01').sum do |line|
-    line.scan(/\d/).values_at(0, -1).reduce(&:+).to_i
+def part1
+  AOC.input_lines('day_01').sum do |line|
+    line.scan(/\d/).values_at(0, -1).join.to_i
   end
+end
 
-  part2 = AOC.input_lines('day_01').sum do |line|
+def part2
+  AOC.input_lines('day_01').sum do |line|
     first = { digit: '0', idx: Float::INFINITY }
     last = { digit: '0', ridx: -1 }
 
@@ -27,13 +29,11 @@ solution = lambda do
       last = { digit: token, ridx: ridx } if ridx && last[:ridx] < ridx
     end
 
-    start = DIGITS[first[:digit]] || first[:digit]
-    ed = DIGITS[last[:digit]] || last[:digit]
+    first = DIGITS[first[:digit]] || first[:digit]
+    last = DIGITS[last[:digit]] || last[:digit]
 
-    (start + ed).to_i
+    (first + last).to_i
   end
-
-  [part1, part2]
 end
 
-AOC.add_solution 1, solution
+AOC.add_solution 1, -> { [part1, part2] }
