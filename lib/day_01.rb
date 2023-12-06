@@ -16,7 +16,7 @@ solution = lambda do
   end
 
   part2 = File.readlines(AOC.input_file('day_01')).sum do |line|
-    first = { digit: '0', idx: Float::INFINITY]
+    first = { digit: '0', idx: Float::INFINITY }
     last = { digit: '0', ridx: -1 }
 
     DIGITS.flatten.each do |token|
